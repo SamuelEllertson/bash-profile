@@ -23,7 +23,7 @@ temp="$code/temp"
 bash="$code/bash"
 bs="$bash/scripts"
 bsn="$bash/snippets"
-brc="~/.bashrc"
+brc="$bash/profile/.bashrc" #This is for my .bashrc hardlink so that I can use git to track it. Real brc at ~/.bashrc
 
 java="$code/java"
 
