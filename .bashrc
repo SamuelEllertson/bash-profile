@@ -56,6 +56,10 @@ PATH="$PATH:$utils/"
 #add youtube-dl to PATH
 PATH="$PATH:/c/Users/nword33/Downloads/youtube-dl"
 
+#add scripts to PATH
+PATH="$PATH:/c/Users/Samue/Desktop/Code/Python/scripts"
+PATH="$PATH:/c/Users/Samue/Desktop/Code/bash/scripts"
+
 #connecting to servers
 alias poly="ssh sellerts@unix1.csc.calpoly.edu"
 alias minix="ssh sam@localhost -p 2222" 
@@ -122,8 +126,11 @@ alias cdm="cd $music"
 alias cdu="cd $utilities"
 alias cdtp="cd $templates"
 
-alias save='export SAVED_DIR=$PWD'
-alias sw='cd $SAVED_DIR'
+alias save_main='export __SAVED_DIR_MAIN=$PWD'
+alias save_return='export __SAVED_DIR_RETURN=$PWD'
+
+alias save="save_main"
+alias sw='if [ $PWD != $__SAVED_DIR_MAIN ] ; then save_return && cd $__SAVED_DIR_MAIN ; else cd $__SAVED_DIR_RETURN ; fi'
 
 #killing processes
 alias firstint="sed 's/^[^0-9]*\([0-9]\+\).*$/\1/'"
