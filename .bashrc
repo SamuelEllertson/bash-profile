@@ -23,12 +23,14 @@ temp="$code/temp"
 bash="$code/bash"
 bs="$bash/scripts"
 bsn="$bash/snippets"
-brc="$bash/profile/.bashrc" #This is for my .bashrc hardlink so that I can use git to track it. Real brc at ~/.bashrc
+brc="~/.bashrc"
 
 java="$code/java"
 
 javascript="$code/javascript"
 js="$javascript"
+
+cpp="$code/c++"
 
 automation="$code/automation"
 
@@ -55,10 +57,6 @@ PATH="$PATH:$utils/"
 
 #add youtube-dl to PATH
 PATH="$PATH:/c/Users/nword33/Downloads/youtube-dl"
-
-#add scripts to PATH
-PATH="$PATH:/c/Users/Samue/Desktop/Code/Python/scripts"
-PATH="$PATH:/c/Users/Samue/Desktop/Code/bash/scripts"
 
 #connecting to servers
 alias poly="ssh sellerts@unix1.csc.calpoly.edu"
@@ -125,12 +123,11 @@ alias cdsv="cd $savedVideos"
 alias cdm="cd $music"
 alias cdu="cd $utilities"
 alias cdtp="cd $templates"
+alias cdcpp="cd $cpp"
 
-alias save_main='export __SAVED_DIR_MAIN=$PWD'
-alias save_return='export __SAVED_DIR_RETURN=$PWD'
-
-alias save="save_main"
-alias sw='if [ $PWD != $__SAVED_DIR_MAIN ] ; then save_return && cd $__SAVED_DIR_MAIN ; else cd $__SAVED_DIR_RETURN ; fi'
+#easy way to save a directory and swap to and from it
+alias save='export SAVED_DIR=$PWD'
+alias sw='if [ $PWD == $SAVED_DIR ]; then command cd $OTHER_SAVED_DIR; else export OTHER_SAVED_DIR=$PWD; command cd $SAVED_DIR'
 
 #killing processes
 alias firstint="sed 's/^[^0-9]*\([0-9]\+\).*$/\1/'"
@@ -168,6 +165,19 @@ alias l="ls --color=always --group-directories-first -lhAb |  awk {'print \$5\"\
 alias req="pip freeze > requirements.txt"
 alias reqs="mv requirements.txt old_requirements.txt && req"
 
+#overriding cd to allow for fuzzy matching
+function cd() {
+    command cd $1 2> /dev/null
+    exit_code="$?"
+
+    if [ $exit_code == "1" ]; 
+    then
+        closest=$(fuzzymatch -w $1 $(command echo */))
+        echo "closest match: $closest"
+        cd $closest
+    fi
+}
+
 # "virtual python" automatically (de)activates virtual environments and runs python under winpty
 function vp {
     if [ -d "./env" ] 
@@ -201,3 +211,5 @@ function man {
     [[ $ok -eq 0 && -n "$pre" ]] && printf '%s' "$pre" | less || printf 'Got nothing.\n' >&2
     return $ok
 }
+
+
