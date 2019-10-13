@@ -129,7 +129,7 @@ alias cdcpp="cd $cpp"
 
 #easy way to save a directory and swap to and from it
 alias save='export SAVED_DIR=$PWD'
-alias sw='if [ $PWD == $SAVED_DIR ]; then command cd $OTHER_SAVED_DIR; else export OTHER_SAVED_DIR=$PWD; command cd $SAVED_DIR'
+alias sw='if [ $PWD == $SAVED_DIR ]; then command cd $OTHER_SAVED_DIR; else export OTHER_SAVED_DIR=$PWD; command cd $SAVED_DIR; fi'
 
 #killing processes
 alias firstint="sed 's/^[^0-9]*\([0-9]\+\).*$/\1/'"
