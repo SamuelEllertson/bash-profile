@@ -15,6 +15,7 @@ pythonProjects="$python/projects"
 pythonScripts="$scripts"
 pythonUtils="$scripts/my_utils"
 pythonTests="$python/tests"
+pythonKata="$python/kata"
 
 ytdl="$pythonActive/ytdl"
 
@@ -30,7 +31,7 @@ java="$code/java"
 javascript="$code/javascript"
 js="$javascript"
 
-cpp="$code/c++"
+cpp="$code/cpp"
 
 automation="$code/automation"
 
@@ -109,6 +110,7 @@ alias cdpt="cd $pythonTests"
 alias cdpu="cd $pythonUtils"
 alias cdpp="cd $pythonProjects"
 alias cdpa="cd $pythonActive"
+alias cdpk="cd $pythonKata"
 
 alias cdb="cd $bash"
 alias cdbs="cd $bs"
