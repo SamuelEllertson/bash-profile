@@ -60,7 +60,7 @@ PATH="$PATH:$utils/"
 PATH="$PATH:/c/Users/nword33/Downloads/youtube-dl"
 
 #connecting to servers
-alias poly="ssh sellerts@unix1.csc.calpoly.edu"
+alias poly="ssh sellerts@unix2.csc.calpoly.edu"
 alias minix="ssh sam@localhost -p 2222" 
 
 #editing bash
@@ -96,7 +96,8 @@ alias gc="git commit -m"
 alias gf="git fetch"
 alias gpl="git pull"
 alias gp="git push"
-alias gi="GetTemplate .gitignore"
+alias gcl="git clone"
+alias gi="git init . && GetTemplate .gitignore"
 
 #navigation
 alias cd..="cd .."
@@ -153,6 +154,7 @@ alias ed="subl"
 alias vlc='2>/dev/null "/C/Program Files/VideoLAN/VLC/vlc.exe"'
 alias python2="C:/Python27/python.exe"
 alias python3.6="C:/Users/Samue/AppData/Local/Programs/Python/Python36/python.exe"
+alias python3.7="C:/Users/Samue/AppData/Local/Programs/Python/Python37/python.exe"
 alias open="explorer.exe"
 alias chrome='"/C/Program Files (x86)/Google/Chrome/Application/chrome.exe"'
 
