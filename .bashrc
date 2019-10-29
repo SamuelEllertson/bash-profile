@@ -76,6 +76,7 @@ alias editprofile="vi /etc/profile && reset && hash -r"
 alias p='for f in *.py; do python "$f"; done'
 alias pi='python -i'
 alias pt='cd $temp && GetTemplate a.py && subl a.py && echo "Changed to temp Directory"'
+alias pip="pip3.8" #workaround
 
 #virtual environments
 alias venv="python -m venv env"
@@ -182,13 +183,13 @@ function cd() {
     fi
 }
 
-# "virtual python" automatically (de)activates virtual environments and runs python under winpty
+# "virtual python" automatically (de)activates virtual environments
 function vp {
     if [ -d "./env" ] 
     then
-        winpty --mouse ./env/Scripts/python.exe $@
+        ./env/Scripts/python.exe $@
     else
-        winpty --mouse python $@
+        python $@
     fi
 }
 
