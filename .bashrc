@@ -50,6 +50,9 @@ music="$desktop/music"
 #enable autocd
 shopt -s autocd cdspell
 
+#only save unique commands to history
+export HISTCONTROL=ignoredups
+
 #change prompt display
 export PS1="\[$(tput bold)\]\[$(tput setaf 1)\][\[$(tput setaf 3)\]\u\[$(tput setaf 2)\]@\[$(tput setaf 4)\]\h \[$(tput setaf 5)\]\W\[$(tput setaf 1)\]]\[$(tput setaf 7)\]\\$ \[$(tput sgr0)\]"
 
@@ -60,7 +63,7 @@ PATH="$PATH:$utils/"
 PATH="$PATH:/c/Users/nword33/Downloads/youtube-dl"
 
 #connecting to servers
-alias poly="ssh sellerts@unix2.csc.calpoly.edu"
+alias poly="ssh sellerts@unix1.csc.calpoly.edu"
 alias minix="ssh sam@localhost -p 2222" 
 
 #editing bash
@@ -68,9 +71,9 @@ alias src="source $brc"
 alias editbash="vi $brc && src && hash -r"
 alias eb="editbash"
 alias ebs="subl $brc"
-alias ep="editprofile"
 alias rs="src && hash -r && reset"
-alias editprofile="vi /etc/profile && reset && hash -r"
+alias editprofile="subl /etc/profile && reset && hash -r"
+alias ep="editprofile"
 
 #running/developing python
 alias p='for f in *.py; do python "$f"; done'
@@ -87,8 +90,8 @@ alias deac="deactivate"
 #ytdl stuff
 alias ytlog="subl '$ytdl/log.txt'"
 alias ytdl="cd '$ytdl' && python '$ytdl/ytdownload.py'"
-alias yt="youtube-dl -f bestvideo+bestaudio --merge-output-format mkv"
-alias yta="youtube-dl -x -f bestaudio --audio-format mp3"
+alias yt='youtube-dl -f bestvideo+bestaudio --merge-output-format mkv -o "%(title)s.%(ext)s"'
+alias yta='youtube-dl -x -f bestaudio --audio-format mp3 -o "%(title)s.%(ext)s"'
 
 #git
 alias gs="git status"
