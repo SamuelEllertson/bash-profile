@@ -104,7 +104,6 @@ alias gf="git fetch"
 alias gpl="git pull"
 alias gp="git push"
 alias gcl="git clone"
-alias gi="git init . && GetTemplate .gitignore"
 
 #navigation
 alias cd..="cd .."
@@ -186,6 +185,15 @@ function cd() {
         closest=$(fuzzymatch -w $1 $(command echo */))
         echo "closest match: $closest"
         cd $closest
+    fi
+}
+
+#creates a .gitignore file. Uses template if no params, otherwise uses getignore script to query gitignore.io
+function gi(){
+    if [ $# -eq 0 ]; then
+        GetTemplate .gitignore
+    else
+        getignore $@
     fi
 }
 
