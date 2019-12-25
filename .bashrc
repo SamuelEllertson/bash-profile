@@ -82,11 +82,13 @@ alias ep="editprofile"
 alias p='for f in *.py; do python "$f"; done'
 alias pi='python -i'
 alias pt='cd $temp && GetTemplate a.py && subl a.py && echo "Changed to temp Directory"'
+alias pt2='cd $temp && GetTemplate a2.py a.py && subl a.py && echo "Changed to temp Directory"'
+alias pt3='cd $temp && GetTemplate a3.py a.py && subl a.py && echo "Changed to temp Directory"'
 alias pip="pip3.8" #workaround
 
 #virtual environments
-alias venv="python -m venv env"
-alias activate="source env/Scripts/activate"
+alias venv="python -m venv venv"
+alias activate="source venv/Scripts/activate"
 alias act="activate"
 alias deac="deactivate"
 
@@ -166,6 +168,7 @@ alias chrome='"/C/Program Files (x86)/Google/Chrome/Application/chrome.exe"'
 
 #misc template aliases
 alias gl="GetTemplate LICENSE.txt"
+alias getpyinit="GetTemplate __init__.py"
 
 #misc
 alias server="python -m http.server 8000 &"
@@ -201,9 +204,9 @@ function gi(){
 
 # "virtual python" automatically (de)activates virtual environments
 function vp {
-    if [ -d "./env" ] 
+    if [ -d "./venv" ] 
     then
-        ./env/Scripts/python.exe $@
+        ./venv/Scripts/python.exe $@
     else
         python $@
     fi
@@ -211,9 +214,9 @@ function vp {
 
 # "virtual pip" for installing packages in a virtual environment
 function vpip {
-    if [ -d "./env" ] 
+    if [ -d "./venv" ] 
     then
-        ./env/Scripts/pip.exe $@
+        ./venv/Scripts/pip.exe $@
     else
         pip $@
     fi
@@ -240,7 +243,7 @@ function man {
 function gettests {
     GetTemplate tests.py test_funcs.py
 
-    if [ -d "./env" ] 
+    if [ -d "./venv" ] 
     then
         vpip install pytest coverage
     fi
@@ -248,22 +251,22 @@ function gettests {
 
 #Run tests on python files, defaults to *.py when run with no arguments
 function check {
-    if [ -d "./env" ] 
+    if [ -d "./venv" ] 
     then
         activate
     fi
     
     if [ $# -eq 0 ]; then
         pyflakes *.py
-        coverage run --source . --omit "env/*" -m pytest --doctest-modules
+        coverage run --source . --omit "venv/*" -m pytest --doctest-modules
     else
         pyflakes $@
-        coverage run --source . --omit "env/*" -m pytest --doctest-modules $@
+        coverage run --source . --omit "venv/*" -m pytest --doctest-modules $@
     fi
 
     coverage report -m
 
-    if [ -d "./env" ] 
+    if [ -d "./venv" ] 
     then
         deactivate
     fi
