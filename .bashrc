@@ -19,6 +19,8 @@ pythonKata="$python/kata"
 
 ytdl="$pythonActive/ytdl"
 
+poly_files="$code/poly_files"
+
 temp="$code/temp"
 
 bash="$code/bash"
@@ -47,30 +49,25 @@ savedVideos="$bulk/saved_yt_videos"
 
 music="$desktop/music"
 
-#enable autocd
-shopt -s autocd cdspell
-
-#only save unique commands to history
-export HISTCONTROL=ignoredups
-
-#stop EOF from closing bash
-export IGNOREEOF=9999
-
-#change prompt display
-export PS1="\[$(tput bold)\]\[$(tput setaf 1)\][\[$(tput setaf 3)\]\u\[$(tput setaf 2)\]@\[$(tput setaf 4)\]\h \[$(tput setaf 5)\]\W\[$(tput setaf 1)\]]\[$(tput setaf 7)\]\\$ \[$(tput sgr0)\]"
-
-#add utils to PATH
+#PATH changes
 PATH="$PATH:$utils/"
-
-#add youtube-dl to PATH
 PATH="$PATH:/c/Users/nword33/Downloads/youtube-dl"
-
-#add gradle to PATH
 PATH="$PATH:/c/Gradle/gradle-6.2.1/bin"
 
+#remotes (lowercase for hostname, uppercase for user@host)
+username="sellerts"
+unix1="unix1.csc.calpoly.edu"
+Unix1="$username@$unix1"
+webdevserver="ec2-34-221-236-150.us-west-2.compute.amazonaws.com"
+Webdevserver="$username@$webdevserver"
+frankserver="frank.ored.calpoly.edu"
+Frankserver="sellerts466@$frankserver"
+frank_iden="-i ~/.ssh/466key.pem"
+
 #connecting to servers
-alias poly="ssh sellerts@unix1.csc.calpoly.edu"
-alias minix="ssh sam@localhost -p 2222" 
+alias poly="ssh $Unix1"
+alias webdev="ssh $Webdevserver"
+alias frank="ssh $frank_iden $Frankserver"
 
 #editing bash
 alias src="source $brc"
@@ -87,17 +84,20 @@ alias pi='python -i'
 alias pt='cd $temp && GetTemplate a.py && subl a.py && echo "Changed to temp Directory"'
 alias pt2='cd $temp && GetTemplate a2.py a.py && subl a.py && echo "Changed to temp Directory"'
 alias pt3='cd $temp && GetTemplate a3.py a.py && subl a.py && echo "Changed to temp Directory"'
+alias pth='GetTemplate a.py && subl a.py && echo "a.py created in: $PWD"'
 alias pip="pip3.8" #workaround
-
-function condabase {
-    eval "$('/c/Users/Samue/anaconda3/Scripts/conda.exe' 'shell.bash' 'hook')"
-}
+alias pdb="vp -m pdb"
 
 #virtual environments
 alias venv="python -m venv venv"
 alias activate="source venv/Scripts/activate"
 alias act="activate"
 alias deac="deactivate"
+
+function cact {
+    eval "$('/c/Users/Samue/anaconda3/Scripts/conda.exe' 'shell.bash' 'hook')"
+}
+alias cdeac="conda deactivate"
 
 #ytdl stuff
 alias ytlog="subl '$ytdl/log.txt'"
@@ -142,6 +142,7 @@ alias cdm="cd $music"
 alias cdu="cd $utilities"
 alias cdtp="cd $templates"
 alias cdcpp="cd $cpp"
+alias cdpl="cd $poly_files"
 
 #easy way to save a directory and swap to and from it
 alias save='export SAVED_DIR=$PWD'
@@ -186,6 +187,19 @@ alias req="pip freeze > requirements.txt"
 alias reqs="mv requirements.txt old_requirements.txt && req"
 alias pprint="pygmentize -g -O style=monokai,linenos=1"
 alias pp="pprint"
+
+#enable autocd
+shopt -s autocd cdspell
+
+#only save unique commands to history
+export HISTCONTROL=ignoredups
+
+#stop EOF from closing bash
+export IGNOREEOF=9999
+
+#change prompt display (new version same, but faster)
+#export PS1="\[$(tput bold)\]\[$(tput setaf 1)\][\[$(tput setaf 3)\]\u\[$(tput setaf 2)\]@\[$(tput setaf 4)\]\h \[$(tput setaf 5)\]\W\[$(tput setaf 1)\]]\[$(tput setaf 7)\]\\$ \[$(tput sgr0)\]"
+export PS1="\[\e[1m\]\[\e[31m\][\[\e[33m\]\u\[\e[32m\]@\[\e[34m\]\h \[\e[35m\]\W\[\e[31m\]]\[\e[37m\]\$ \[\e[0;10m\]"
 
 #overriding cd to allow for fuzzy matching
 function cd() {
