@@ -3,7 +3,11 @@
 mainDrive="/c"
 bulk="/d"
 
-desktop="$mainDrive/Users/Samue/Desktop"
+userHome="$mainDrive/Users/Samue"
+appData="$userHome/AppData"
+roaming="$appData/Roaming"
+
+desktop="$userHome/Desktop"
 desk=$desktop
 
 code="$desktop/code"
@@ -47,7 +51,9 @@ ctf="$code/ctf"
 video="$desktop/video"
 savedVideos="$bulk/saved_yt_videos"
 
-music="$desktop/music"
+music="$bulk/music"
+
+sublimeConfig="$roaming/Sublime Text 3/Packages/User"
 
 #PATH changes
 PATH="$PATH:$utils/"
@@ -87,6 +93,8 @@ alias pt3='cd $temp && GetTemplate a3.py a.py && subl a.py && echo "Changed to t
 alias pth='GetTemplate a.py && subl a.py && echo "a.py created in: $PWD"'
 alias pip="pip3.8" #workaround
 alias pdb="vp -m pdb"
+alias pytohn="python" #common typo
+alias pup="vpip install --upgrade"
 
 #virtual environments
 alias venv="python -m venv venv"
@@ -144,6 +152,9 @@ alias cdtp="cd $templates"
 alias cdcpp="cd $cpp"
 alias cdpl="cd $poly_files"
 
+#cd alias's that are gross
+alias cdsubl='command cd "$sublimeConfig"'
+
 #easy way to save a directory and swap to and from it
 alias save='export SAVED_DIR=$PWD'
 alias sw='if [ $PWD == $SAVED_DIR ]; then command cd $OTHER_SAVED_DIR; else export OTHER_SAVED_DIR=$PWD; command cd $SAVED_DIR; fi'
@@ -188,6 +199,12 @@ alias reqs="mv requirements.txt old_requirements.txt && req"
 alias pprint="pygmentize -g -O style=monokai,linenos=1"
 alias pp="pprint"
 
+#curl programs
+alias wttr="curl wttr.in"
+alias coin="curl rate.sx"
+alias bat="curl rate.sx/BAT"
+alias ip="curl ipinfo.io"
+
 #enable autocd
 shopt -s autocd cdspell
 
@@ -201,6 +218,9 @@ export IGNOREEOF=9999
 #export PS1="\[$(tput bold)\]\[$(tput setaf 1)\][\[$(tput setaf 3)\]\u\[$(tput setaf 2)\]@\[$(tput setaf 4)\]\h \[$(tput setaf 5)\]\W\[$(tput setaf 1)\]]\[$(tput setaf 7)\]\\$ \[$(tput sgr0)\]"
 export PS1="\[\e[1m\]\[\e[31m\][\[\e[33m\]\u\[\e[32m\]@\[\e[34m\]\h \[\e[35m\]\W\[\e[31m\]]\[\e[37m\]\$ \[\e[0;10m\]"
 
+#make python REPL run my startup script
+export PYTHONSTARTUP="$pythonUtils/repl_startup.py"
+
 #overriding cd to allow for fuzzy matching
 function cd() {
     command cd $1 2> /dev/null
@@ -210,7 +230,7 @@ function cd() {
     then
         closest=$(fuzzymatch -w $1 $(command echo */))
         echo "closest match: $closest"
-        cd $closest
+        command cd $closest
     fi
 }
 
@@ -318,3 +338,13 @@ function compressVideo {
 
     ffmpeg -i "$1" -vcodec libvpx-vp9 -b:v 1M -acodec libvorbis "$filename.webm"
 }
+
+function qr {
+    curl "qrenco.de/$1"
+}
+
+function dict {
+    curl "dict://dict.org/d:$1"
+}
+
+cdt
