@@ -57,7 +57,6 @@ sublimeConfig="$roaming/Sublime Text 3/Packages/User"
 
 #PATH changes
 PATH="$PATH:$utils/"
-PATH="$PATH:/c/Users/nword33/Downloads/youtube-dl"
 PATH="$PATH:/c/Gradle/gradle-6.2.1/bin"
 
 #remotes (lowercase for hostname, uppercase for user@host)
