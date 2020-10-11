@@ -53,6 +53,8 @@ savedVideos="$bulk/saved_yt_videos"
 
 music="$bulk/music"
 
+github="$code/github"
+
 sublimeConfig="$roaming/Sublime Text 3/Packages/User"
 
 #PATH changes
@@ -86,11 +88,11 @@ alias ep="editprofile"
 #running/developing python
 alias p='for f in *.py; do python "$f"; done'
 alias pi='python -i'
+alias vpi="vp -i"
 alias pt='cd $temp && GetTemplate a.py && subl a.py && echo "Changed to temp Directory"'
 alias pt2='cd $temp && GetTemplate a2.py a.py && subl a.py && echo "Changed to temp Directory"'
 alias pt3='cd $temp && GetTemplate a3.py a.py && subl a.py && echo "Changed to temp Directory"'
 alias pth='GetTemplate a.py && subl a.py && echo "a.py created in: $PWD"'
-alias pip="pip3.8" #workaround
 alias pdb="vp -m pdb"
 alias pytohn="python" #common typo
 alias pup="vpip install --upgrade"
@@ -139,6 +141,8 @@ alias cdb="cd $bash"
 alias cdbs="cd $bs"
 alias cdbsn="cd $bsn"
 
+alias cdgh="cd $github"
+
 alias cdd="cd $desktop"
 alias cdj="cd $java"
 alias cdjs="cd $js"
@@ -178,9 +182,10 @@ alias killall="killvlc && killjobs && killpython && killssh"
 alias subl='"/C/Program Files/Sublime Text 3/subl.exe"'
 alias ed="subl"
 alias vlc='2>/dev/null "/C/Program Files/VideoLAN/VLC/vlc.exe"'
-alias python2="C:/Python27/python.exe"
 alias python3.6="C:/Users/Samue/AppData/Local/Programs/Python/Python36/python.exe"
 alias python3.7="C:/Users/Samue/AppData/Local/Programs/Python/Python37/python.exe"
+alias python3.8="C:/Users/Samue/AppData/Local/Programs/Python/Python38/python.exe"
+alias python3.9="C:/Users/Samue/AppData/Local/Programs/Python/Python39/python.exe"
 alias open="explorer.exe"
 alias chrome='"/C/Program Files (x86)/Google/Chrome/Application/chrome.exe"'
 
